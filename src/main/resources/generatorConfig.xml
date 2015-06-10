@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!-- mybatis生成代码配置文件 -->
+<generatorConfiguration>
+    <classPathEntry
+        location="/Users/hu_hengjiu/.m2/repository/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar" />
+    <context id="context1" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://127.0.0.1:3306/app_terrychiutest?useUnicode=true&amp;characterEncoding=UTF-8"
+            userId="root" password="" />
+        <javaModelGenerator targetPackage="com.zoneber.org.entity"
+            targetProject="/Users/hu_hengjiu/usr/local/workspace/zbweb/src/main/java" />
+        <sqlMapGenerator targetPackage="com.zoneber.org.mapping"
+            targetProject="/Users/hu_hengjiu/usr/local/workspace/zbweb/src/main/resources" />
+        <javaClientGenerator targetPackage="com.zoneber.org.dao"
+            targetProject="/Users/hu_hengjiu/usr/local/workspace/zbweb/src/main/java" type="XMLMAPPER" />
+        <table schema="" tableName="ZB_USERS" 
+        domainObjectName="ZbUsers" enableCountByExample="false"
+        enableDeleteByExample="false" enableSelectByExample="false"
+        enableUpdateByExample="false" enableInsert="true"
+        enableUpdateByPrimaryKey="true"/>
+    </context>
+</generatorConfiguration>
