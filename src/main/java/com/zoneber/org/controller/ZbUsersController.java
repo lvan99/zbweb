@@ -33,27 +33,31 @@ public class ZbUsersController {
 	@RequestMapping(value = "/update")
 	@ResponseBody
 	public boolean update(String oper, ZbUsers record) {
-		System.out.println("oper:"+oper);
+		//System.out.println("oper:"+oper);
 		if(oper.equalsIgnoreCase(ZoneberConstants.OPER_ADD)) {
 			return zbUsersService.insert(record);
 		} else if(oper.equalsIgnoreCase(ZoneberConstants.OPER_UPDATE)) {
 			return zbUsersService.updateByPrimaryKey(record);
+		} else if(oper.equalsIgnoreCase(ZoneberConstants.OPER_DEL)){
+			return zbUsersService.deleteByPrimaryKey(record.getId());
 		} else {
 			//操作不对
 			return false;
 		}
 	}
 	
-	@RequestMapping(value = "/delete")
-	@ResponseBody
-	public boolean delete(String id) {
-		return zbUsersService.deleteByPrimaryKey(id);
-	}
+//	@RequestMapping(value = "/delete")
+//	@ResponseBody
+//	public boolean delete(String id) {
+//		return zbUsersService.deleteByPrimaryKey(id);
+//	}
 	
 	@RequestMapping(value = "/select")
 	@ResponseBody
 	public List<ZbUsers> select() {
-		return zbUsersService.select();
+		List<ZbUsers> list = zbUsersService.select();
+		System.out.println(list);
+		return list;
 	}
 	
 	

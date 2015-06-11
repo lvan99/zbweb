@@ -9,5 +9,6 @@ package com.zoneber.constants;
  */
 public class ZoneberConstants {
 	public static String OPER_ADD = "add";
-	public static String OPER_UPDATE = "update";
+	public static String OPER_UPDATE = "edit";
+	public static String OPER_DEL = "del";
 }

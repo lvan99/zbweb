@@ -878,11 +878,11 @@
 			
 				jQuery(grid_selector).jqGrid({
 					//direction: "rtl",
-					url: $path_base+"/zoneber/org/users/select.do",
+					url: "../zoneber/org/users/select.do",
 					//data: grid_data,
-					datatype: "local",
+					datatype: "json",
 					height: 250,
-					colNames:[' ', 'ID','USER_NAME','SEX（男）', 'PHONE_NUM', 'EMAIL','JOB_STATUS'],
+					colNames:[' ', 'ID','用户名','性别', '手机号', '邮箱','是否在职'],
 					colModel:[
 						{name:'myac',index:'', width:80, fixed:true, sortable:false, resize:false,
 							formatter:'actions', 
@@ -895,10 +895,10 @@
 						},
 						{name:'id',index:'id', width:60, sorttype:"int", editable: true, hidden:true, hidedlg:true},
 						{name:'userName',index:'userName',width:90, editable:true},
-						{name:'sex',index:'sex', width:150,editable: true,edittype:"checkbox",editoptions:{value:"男:女"},unformat: aceSwitch},
+						{name:'sex',index:'sex', width:150,editable: true,edittype:"select",editoptions:{value:"1:男;0:女"},formatter:formatSex },
 						{name:'phoneNum',index:'phoneNum', width:70, editable: true,edittype:"text"},
 						{name:'email',index:'email', width:90, editable: true,edittype:"text"},
-						{name:'jobStatus',index:'jobStatus', width:150, sortable:false,editable: true,edittype:"textarea", editoptions:{rows:"2",cols:"20"}} 
+						{name:'jobStatus',index:'jobStatus', width:150, sortable:false,editable: true,edittype:"checkbox", editoptions:{value:"1:0"},formatter:formatJobStatus,unformat: aceSwitch} 
 					], 
 			
 					viewrecords : true,
@@ -934,6 +934,14 @@
 				//enable search/filter toolbar
 				//jQuery(grid_selector).jqGrid('filterToolbar',{defaultSearch:true,stringResult:true})
 			
+				function formatSex( cellValue, options, cell) {
+						return cellValue == "1" ? "男" : "女";
+				}
+				
+				function formatJobStatus( cellValue, options, cell) {
+					return cellValue == "1" ? "是" : "否";
+				}
+				
 				//switch element when editing inline
 				function aceSwitch( cellvalue, options, cell ) {
 					setTimeout(function(){
@@ -971,7 +979,7 @@
 					},
 					{
 						//edit record form
-						//closeAfterEdit: true,
+						closeAfterEdit: true,
 						recreateForm: true,
 						beforeShowForm : function(e) {
 							var form = $(e[0]);
@@ -1039,8 +1047,10 @@
 				function style_edit_form(form) {
 					//enable datepicker on "sdate" field and switches for "stock" field
 					/* form.find('input[name=sdate]').datepicker({format:'yyyy-mm-dd' , autoclose:true})
-						.end().find('input[name＝sex]') */
-							  form.find('input[name=sex]').addClass('ace ace-switch ace-switch-5').wrap('<label class="inline" />').after('<span class="lbl"></span>');
+						.end().find('input[name＝sex]') 
+						Warning：表单POST不能wrap inline
+						.wrap('<label class="inline" />')*/
+							  form.find('input[name=jobStatus]').addClass('ace ace-switch ace-switch-5').after('<span class="lbl"></span>');
 			
 					//update buttons classes
 					var buttons = form.next().find('.EditButton .fm-button');

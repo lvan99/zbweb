@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pmt.framework.util.UUIDGenerator;
 import com.zoneber.org.dao.ZbUsersMapper;
 import com.zoneber.org.entity.ZbUsers;
 import com.zoneber.org.service.ZbUsersServiceI;
@@ -23,6 +24,11 @@ public class ZbUsersServiceImpl implements ZbUsersServiceI{
 	
 	@Override
 	public boolean insert(ZbUsers record) {
+		//增加ID
+		String id = UUIDGenerator.getUUID();
+		System.out.println("id:"+id);
+		
+		record.setId(id);
 		return zbUserMapper.insertSelective(record) != -1;
 	}
 	
